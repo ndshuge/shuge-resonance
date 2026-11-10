@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    .p { fill: #e7eae6 } .k { stroke: #14181b } .r { stroke: #c63c27 } .b { stroke: #24408e }
+    @media (prefers-color-scheme: dark) { .p { fill: #07090e } .k { stroke: #f0e8d9 } .r { stroke: #ff8c6c } .b { stroke: #7fa8ff } }
+  </style>
+  <rect class="p" width="64" height="64" rx="14"/>
+  <g fill="none" stroke-width="3" stroke-linecap="round">
+    <path class="b" d="M18 10 Q12 32 18 54"/>
+    <path class="k" d="M32 10 Q40 32 32 54"/>
+    <path class="r" d="M46 16 Q42 34 46 50"/>
+  </g>
+</svg>

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>谐振 · 鼠哥的个人主页</title>
+<meta name="description" content="鼠哥（蒋松锡）的个人主页，也是一件可以弹的乐器。几百根弦，每件作品一根，碰到就会响。">
+<meta name="theme-color" content="#e7eae6">
+<meta property="og:title" content="谐振 · 鼠哥的个人主页">
+<meta property="og:description" content="一件可以弹的个人主页。几百根弦，每件作品一根。">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" as="font" type="font/woff2" href="fonts/ResonanceSerif-Text.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/ResonanceSerif-Display.woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<canvas id="stage" aria-hidden="true"></canvas>
+<div class="shield" aria-hidden="true"></div>
+
+<header class="bar">
+  <a class="mark" href="#cover">鼠哥 <i>shuge</i></a>
+  <nav class="bar-nav" aria-label="乐章">
+    <a href="#program">节目单</a>
+    <a href="#works">造物</a>
+    <a href="#overtones">泛音</a>
+    <a href="#ensemble">合奏</a>
+    <a href="#coda">调音</a>
+  </nav>
+  <button class="sound" id="sound" type="button" aria-label="声音：关。点按切换音量">声音 <i id="sound-level">关</i></button>
+</header>
+
+<main id="main">
+
+  <section id="cover" class="sec sec-cover" data-sec="0">
+    <h1 class="title" aria-label="谐振"><span>谐</span><span>振</span></h1>
+    <div class="cover-text">
+      <p class="cover-line">我是鼠哥。这是我的个人主页，也是一件乐器。</p>
+      <p class="hint" id="hint"><span class="hint-bow" aria-hidden="true"></span><span class="hint-fine">横着划过这些弦</span><span class="hint-coarse">左右滑过上面这些弦</span></p>
+    </div>
+  </section>
+
+  <section id="program" class="sec" data-sec="1">
+    <h2 class="plain-h">节目单</h2>
+    <p class="lead">我叫蒋松锡，网上叫鼠哥。在西安交通大学读电子科学与技术，2026 级，大一。</p>
+    <p class="lead">课余把想法做成能打开、能操作、能探索的东西：游戏、学习工具、AI Agent、一座 3D 校园。到现在公开了 <span data-fill="works">53</span> 件。</p>
+    <ol class="program">
+      <li><a href="#works"><span class="p-no">第一乐章</span><span class="p-name">造物</span><i class="p-tempo">Allegro</i><span class="p-what"><span data-fill="works">53</span> 件作品</span></a></li>
+      <li><a href="#overtones"><span class="p-no">第二乐章</span><span class="p-name">泛音</span><i class="p-tempo">Andante</i><span class="p-what">我怎么学东西</span></a></li>
+      <li><a href="#ensemble"><span class="p-no">第三乐章</span><span class="p-name">合奏</span><i class="p-tempo">Scherzo</i><span class="p-what">和别人一起做的事</span></a></li>
+      <li><a href="#coda"><span class="p-no">尾声</span><span class="p-name">调音</span><i class="p-tempo">Lento</i><span class="p-what">还没定下来的事</span></a></li>
+    </ol>
+    <p class="prose">演出还没开始。往下之前，你可以先随便弹。</p>
+  </section>
+
+  <section id="works" class="sec" data-sec="2">
+    <header class="mv">
+      <p class="mv-no">第一乐章</p>
+      <h2 class="mv-name">造物</h2>
+      <p class="mv-tempo"><i>Allegro</i></p>
+    </header>
+    <p class="lead">这座塔上，每件作品是一根弦，五种颜色是五个方向。滚动下面这份清单，就是在弹它。</p>
+    <div class="chips" id="chips" role="group" aria-label="按方向筛选作品"></div>
+    <ol class="worklist" id="worklist"></ol>
+    <p class="prose list-foot">做东西有四条规矩：能运行的优先，讲得清的优先，测过的优先，发布要谨慎。代码写完了，不等于功能验过了。</p>
+  </section>
+
+  <section id="overtones" class="sec" data-sec="3">
+    <header class="mv">
+      <p class="mv-no">第二乐章</p>
+      <h2 class="mv-name">泛音</h2>
+      <p class="mv-tempo"><i>Andante</i></p>
+    </header>
+    <p class="lead">一根弦从来不只发一个音。基音上面还叠着两倍、三倍、四倍频的泛音，音色就是它们的配比。</p>
+    <p class="lead">我学东西也照这个顺序：先抓住基音，也就是直觉；再一层层往上叠原理和推导；最后才是能写进考卷的标准写法。一次只啃一道题，错了先补，再往下走。</p>
+    <div class="toy" id="toy-modes">
+      <p class="toy-say">点亮几个泛音，最下面那根粗弦会把它们叠起来。</p>
+      <div class="modes" id="modes" role="group" aria-label="泛音开关"></div>
+      <div class="toy-row">
+        <button type="button" class="btn" id="modes-all">八个全开</button>
+        <button type="button" class="btn" id="modes-one">只留基音</button>
+      </div>
+      <p class="toy-note" id="modes-note" aria-live="polite">现在只有基音：一条最简单的正弦。</p>
+    </div>
+    <p class="prose">正在叠的课：高等数学、线性代数、C 语言、Python，还有 RoboCup 视觉组要用的 OpenCV。</p>
+    <p class="prose">比起一直听课，我更习惯自己动手拆开来学，所以给自己搭了五所学校：微积分、Python、C 语言、芯片战争、大学物理。<a class="go" href="https://ndshuge.github.io/ndshuge-academy/" target="_blank" rel="noopener">去鼠哥学院旁听</a></p>
+  </section>
+
+  <section id="ensemble" class="sec" data-sec="4">
+    <header class="mv">
+      <p class="mv-no">第三乐章</p>
+      <h2 class="mv-name">合奏</h2>
+      <p class="mv-tempo"><i>Scherzo</i></p>
+    </header>
+    <p class="lead">屏幕之外，我喜欢那些得有别人在场才成立的事。</p>
+    <dl class="band">
+      <div><dt>乐队</dt><dd>在学校的乐队里。喜欢的音乐家里有坂本龙一。</dd></div>
+      <div><dt>话剧团</dt><dd>上台，当一会儿别人。</dd></div>
+      <div><dt>RoboCup 视觉组</dt><dd>教机器人看清球场，用的是 OpenCV。</dd></div>
+      <div><dt>乒乓球</dt><dd>这面弦板就是给它搭的。</dd></div>
+      <div><dt>赛艇</dt><dd>桨频对上了，船才走得直。</dd></div>
+    </dl>
+    <div class="toy" id="toy-balls">
+      <p class="toy-say"><span class="hint-fine">点一下弦板，在那里放一颗球。</span><span class="hint-coarse">点一下上面的弦板，在那里放一颗球。</span></p>
+      <div class="toy-row">
+        <button type="button" class="btn" id="drop">放一颗球</button>
+        <button type="button" class="btn" id="drop-many">放五颗</button>
+      </div>
+    </div>
+    <p class="prose">一个人的时候，用 Blender 做三维动画，打游戏，看电影。</p>
+  </section>
+
+  <section id="coda" class="sec sec-coda" data-sec="5">
+    <header class="mv">
+      <p class="mv-no">尾声</p>
+      <h2 class="mv-name">调音</h2>
+      <p class="mv-tempo"><i>Lento</i></p>
+    </header>
+    <p class="lead">音乐会开始之前，灯会暗下来，所有人对着同一个 A 调音。</p>
+    <p class="lead">我现在就在这一步。芯片、软件系统、AI，还是它们的交叉，我还没定。只知道想做有技术深度的事，也想把音乐、运动和朋友留在生活里。</p>
+    <p class="prose">电路里有个词叫谐振：外来的频率对上了系统自己的频率，很小的推力也能荡出很大的振幅。</p>
+    <p class="formula" aria-label="谐振频率 f 零 等于 二 π 根号 L C 分之一"><span class="f0"><i>f</i><sub>0</sub></span> <span class="eq">=</span> <span class="frac"><span>1</span><span>2π<span class="rad">√<span class="rad-in"><i>LC</i></span></span></span></span></p>
+    <div class="toy" id="toy-tune">
+      <p class="toy-say" id="tune-say">拖动滑块，把中间这根弦调到 440 Hz。听拍音：它越慢，你越近。</p>
+      <input class="tune" type="range" id="tune" min="-60" max="60" step="0.5" value="-38" aria-label="调音，单位是音分，目标是 0">
+      <dl class="tune-read">
+        <div><dt>我的弦</dt><dd><b id="hz">430.4</b> Hz</dd></div>
+        <div><dt>标准音</dt><dd>440.0 Hz</dd></div>
+        <div><dt>拍音</dt><dd><b id="beat">9.6</b> 次/秒</dd></div>
+      </dl>
+    </div>
+    <div class="resolved" id="resolved" hidden>
+      <p class="resolved-big">对上了。</p>
+      <p class="lead">这只是其中一根。别的弦还在调，演出还没开始。</p>
+      <button type="button" class="btn" id="retune">把弦松开，再调一次</button>
+    </div>
+
+    <footer class="foot">
+      <p class="foot-line"><a class="go" href="https://github.com/ndshuge" target="_blank" rel="noopener">在 GitHub 上找我：ndshuge</a></p>
+      <p class="foot-h">更早的几版自我介绍</p>
+      <ul class="foot-list">
+        <li><a href="https://ndshuge.github.io/shuge-tapeout/" target="_blank" rel="noopener">我把自己流片了</a><span>一张可以一路放大的晶圆</span></li>
+        <li><a href="https://ndshuge.github.io/shuge-odyssey/" target="_blank" rel="noopener">SHUGE Odyssey</a><span>一颗可以探索的小星球</span></li>
+        <li><a href="https://ndshuge.github.io/ndshuge-galaxy/" target="_blank" rel="noopener">鼠哥星系</a><span>像素星空里的作品入口</span></li>
+      </ul>
+      <p class="colophon">这一页没有框架，没有图片，也没有音频文件。画面是原生 WebGL2 画的 <span data-fill="strings">几百</span> 根直线，声音是浏览器现场算出来的拨弦。标题用思源宋体的子集，西文用 Bodoni Moda。鼠哥发起，Claude 协助设计与开发。</p>
+    </footer>
+  </section>
+
+</main>
+
+<a class="tip" id="tip" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><span class="tip-t" id="tip-t"></span><span class="tip-o">打开</span></a>
+
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+  <div class="gate-inner">
+    <p class="gate-kicker">鼠哥的个人主页</p>
+    <h2 class="gate-title" id="gate-title"><span>谐</span><span>振</span></h2>
+    <p class="gate-note">这一页有 <span data-fill="strings">几百</span> 根弦，碰到就会响。</p>
+    <div class="gate-actions">
+      <button type="button" class="btn btn-main" id="enter-sound">打开声音入场</button>
+      <button type="button" class="btn" id="enter-mute">静音入场</button>
+    </div>
+  </div>
+</div>
+
+<noscript><p class="noscript">这一页需要 JavaScript 才能弹。文字内容仍然可以往下读。</p></noscript>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
